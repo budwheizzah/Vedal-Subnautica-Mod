@@ -21,6 +21,8 @@ public sealed class TwitchIntegration : MonoBehaviour
     private readonly TwitchClient _client;
     private readonly ConcurrentQueue<string> _msgQueue = new();
 
+    public Action onSubscriber;
+
     public TwitchIntegration()
     {
         DevConsole.RegisterConsoleCommand(this, "say", true, true);
@@ -40,6 +42,9 @@ public sealed class TwitchIntegration : MonoBehaviour
         _client.OnJoinedChannel += (_, _) => LOGGER.LogInfo("Joined");
         _client.OnFailureToReceiveJoinConfirmation += (_, evt) => LOGGER.LogError($"Could not join: {evt.Exception.Details}");
         _client.OnMessageReceived += Client_OnMessageReceived;
+        _client.OnNewSubscriber += Client_OnNewSubscriptionReceived;
+        _client.OnReSubscriber += Client_OnReSubscriptionReceived;
+        _client.OnGiftedSubscription += Client_OnGiftSubscriptionReceived;
 
         if (!File.Exists(Path.Combine(AssetLoader.AssetsFolder, "..", "cache.json")))
         {
@@ -52,6 +57,21 @@ public sealed class TwitchIntegration : MonoBehaviour
         _client.Initialize(credentials, TARGET_CHANNEL);
 
         _client.Connect();
+    }
+
+    private void Client_OnNewSubscriptionReceived(object _, OnNewSubscriberArgs evt)
+    {
+        onSubscriber?.Invoke();
+    }
+
+    private void Client_OnReSubscriptionReceived(object _, OnReSubscriberArgs evt)
+    {
+        onSubscriber?.Invoke();
+    }
+
+    private void Client_OnGiftSubscriptionReceived(object _, OnGiftedSubscriptionArgs evt)
+    {
+        onSubscriber?.Invoke();
     }
 
     private void Client_OnMessageReceived(object _, OnMessageReceivedArgs evt)

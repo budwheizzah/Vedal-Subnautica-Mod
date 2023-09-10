@@ -23,6 +23,7 @@ public static class TutelLoader
     public static readonly SoundCollection2D PickupSounds = SoundCollection2D.Create("tutel/pickup", AudioUtils.BusPaths.PDAVoice);
     public static readonly SoundCollection2D ScanSounds = SoundCollection2D.Create("tutel/scan", AudioUtils.BusPaths.PDAVoice);
     public static readonly SoundCollection3D WorldSounds = SoundCollection3D.Create("tutel/noises", AudioUtils.BusPaths.UnderwaterCreatures); // todo: get rid of fmod erros for loading the same audio file twice
+    public static readonly SoundCollection3D SubscriberSounds = SoundCollection3D.Create("tutel/sub", AudioUtils.BusPaths.UnderwaterCreatures);
 
     public static void Load()
     {

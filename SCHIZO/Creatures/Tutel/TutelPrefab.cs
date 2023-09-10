@@ -6,6 +6,7 @@ using Nautilus.Assets;
 using Nautilus.Utility;
 using SCHIZO.Extensions;
 using SCHIZO.Sounds;
+using SCHIZO;
 using UnityEngine;
 
 namespace SCHIZO.Creatures.Tutel;
@@ -64,8 +65,8 @@ public class TutelPrefab : CreatureAsset
 		CreaturePrefabUtils.AddDamageModifier(prefab, DamageType.Starve, 0f);
 
         prefab.FindChild("WM").AddComponent<AnimateByVelocity>().enabled = false; // fixes Aquarium
-
-		yield break;
+        prefab.AddComponent<TutelExtension>();
+yield break;
 	}
 
 	public override void ApplyMaterials(GameObject prefab) => MaterialUtils.ApplySNShaders(prefab, 1f);

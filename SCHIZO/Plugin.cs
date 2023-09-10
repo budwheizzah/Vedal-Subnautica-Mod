@@ -21,6 +21,8 @@ public partial class Plugin : BaseUnityPlugin
 {
     public static ManualLogSource LOGGER { get; private set; }
 
+    public static TwitchIntegration TWITCH { get; set; }
+
     public static readonly Config CONFIG = OptionsPanelHandler.RegisterModOptions<Config>();
 
 	private void Awake()
@@ -36,7 +38,7 @@ public partial class Plugin : BaseUnityPlugin
 		GymbagLoader.Load();
         GreggsLoader.Load();
 
-        gameObject.AddComponent<TwitchIntegration>();
+        TWITCH = gameObject.AddComponent<TwitchIntegration>();
 
 		Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 	}
