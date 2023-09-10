@@ -21,7 +21,7 @@ namespace SCHIZO.Creatures.Tutel
             if (myDraw <= playProbability)
             {
                 LOGGER.LogDebug($"{GetType().Name} Subscription detected! Sound draw positive");
-                TutelLoader.HurtSounds.Play(MyEmitter);
+                TutelLoader.SubscriberSounds.Play(MyEmitter);
             }
             else
             {
