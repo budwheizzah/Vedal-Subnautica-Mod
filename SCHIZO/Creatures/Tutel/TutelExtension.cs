@@ -5,7 +5,7 @@ namespace SCHIZO.Creatures.Tutel
 {
     public class TutelExtension : MonoBehaviour
     {
-        private float playProbability = 0.03f;
+        private float playProbability = 0.15f;
         private FMOD_CustomEmitter MyEmitter;
 
         private void Start()
